@@ -1,0 +1,6 @@
+@API_Motel_Luxor_HostAddress = http://localhost:5066
+
+GET {{API_Motel_Luxor_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
