@@ -1,0 +1,25 @@
+﻿
+
+// COMANDO PARA CRIAÇÃO E MODELAGEM DO BANCO DE DADOS DO PROJETO
+
+// CRIAÇÃO DO BANCO
+
+CREATE DATABASE Luxor;
+
+
+// CRIAÇÃO DE TABELA FUNCIONARIOS
+ 
+  CREATE TABLE colaboradores (
+    colaborador_id SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    data_nascimento DATE NOT NULL,
+    cpf VARCHAR(11) UNIQUE NOT NULL,
+    endereco TEXT NOT NULL,
+    telefone VARCHAR(15),
+    email VARCHAR(100) UNIQUE,
+    data_admissao DATE NOT NULL,
+    cargo VARCHAR(50) NOT NULL,
+    salario NUMERIC(10, 2) NOT NULL,
+    departamento VARCHAR(50) NOT NULL,
+    status VARCHAR(20) DEFAULT 'Ativo'
+);
