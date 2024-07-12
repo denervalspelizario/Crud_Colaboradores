@@ -4,7 +4,6 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -16,8 +15,6 @@ builder.Services.AddControllers()
     });
 
 
-
-
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -25,9 +22,6 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "API LUXOR", Version = "v1" });
    
 });
-
-
-
 
 
 // Indicando que ColaboradoresRepository recebe de herança(referenciada) a interface IColaboradoresRepository

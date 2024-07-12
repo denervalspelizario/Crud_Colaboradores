@@ -24,7 +24,10 @@ namespace API_Motel_Luxor.Services.Colaboradores
 
                 // data de cadastro do usuario
                 DateTime dataAdmissao = DateTime.Today.Date;
-                
+
+               // data de nascimento para formato aceito no banco
+                DateTime dataNascimento = DateTime.Parse(colaborador.Data_nascimento);
+
 
                 // email ja cadastrado?
                 var emailDuplicado = await _context.Colaboradores.FirstOrDefaultAsync(x => x.email == colaborador.Email);
@@ -57,9 +60,10 @@ namespace API_Motel_Luxor.Services.Colaboradores
                 // criando obj para adicionar no db
                 var colaboradorAdicionado = new ColaboradoresModel(
                     colaborador.Nome,
-                    colaborador.Data_nascimento,
+                    dataNascimento,
                     colaborador.Cpf,
                     colaborador.Endereco,
+                    colaborador.Sexo.ToString(),
                     colaborador.Telefone,
                     colaborador.Email,
                     dataAdmissao,
@@ -82,21 +86,19 @@ namespace API_Motel_Luxor.Services.Colaboradores
                 var colaboradorEncontrado = await _context.Colaboradores.FirstOrDefaultAsync(x => x.email == colaboradorAdicionado.email);
                 
 
-                // Formatacao das datas
-                string dataNascimentoFormatada =  colaboradorEncontrado.data_nascimento.ToString("yyyy-MM-dd");
-                string dataAdmissaoFormatada =  colaboradorEncontrado.data_admissao.ToString("yyyy-MM-dd");
-
+                
 
                 // formatando dados do novo colaborador para resposta
                 var colaboradorResposta = new ColaboradorResponseDTO(
                     colaboradorEncontrado.colaborador_id,
                     colaboradorEncontrado.nome,
-                    dataNascimentoFormatada,
+                    colaboradorEncontrado.data_nascimento.ToString("dd-MM-yyyy"),
                     colaboradorEncontrado.cpf,
                     colaboradorEncontrado.endereco,
+                    colaboradorEncontrado.sexo,
                     colaboradorEncontrado.telefone,
                     colaboradorEncontrado.email,
-                    dataAdmissaoFormatada,
+                    colaboradorEncontrado.data_admissao.ToString("dd-MM-yyyy"),
                     colaboradorEncontrado.cargo,
                     colaboradorEncontrado.salario,
                     colaboradorEncontrado.departamento

@@ -15,6 +15,7 @@ CREATE DATABASE Luxor;
     data_nascimento DATE NOT NULL,
     cpf VARCHAR(11) UNIQUE NOT NULL,
     endereco TEXT NOT NULL,
+    sexo VARCHAR(50),
     telefone VARCHAR(15),
     email VARCHAR(100) UNIQUE,
     data_admissao DATE NOT NULL,

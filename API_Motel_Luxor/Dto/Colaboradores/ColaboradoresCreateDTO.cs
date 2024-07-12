@@ -9,14 +9,17 @@ namespace API_Motel_Luxor.Dto.Colaboradores
         [Required(ErrorMessage = "O nome do colaborador é obrigatório.")]
         public string Nome { get; set; }
 
-        [Column(TypeName = "date")]
-        public DateTime Data_nascimento { get; set; }
+        
+        public string Data_nascimento { get; set; }
 
         [Required(ErrorMessage = "O cpf do colaborador é obrigatório.")]
         public string Cpf { get; set; }
 
         [Required(ErrorMessage = "O endereço do colaborador é obrigatório.")]
         public string Endereco { get; set; }
+
+        [Required(ErrorMessage = "O sexo do colaborador é obrigatório.")]
+        public SexoEnum Sexo { get; set; }
 
         [Required(ErrorMessage = "O telefone do colaborador é obrigatório.")]
         public string Telefone { get; set; }
