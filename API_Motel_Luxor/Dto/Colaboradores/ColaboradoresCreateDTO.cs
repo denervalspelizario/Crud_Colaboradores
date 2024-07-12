@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using API_Motel_Luxor.Enum;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace API_Motel_Luxor.Dto.Colaboradores
@@ -24,12 +25,12 @@ namespace API_Motel_Luxor.Dto.Colaboradores
         public string Email { get; set; }
 
         [Required(ErrorMessage = "O cargo do colaborador é obrigatório.")]
-        public string Cargo { get; set; }
+        public CargoEnum Cargo { get; set; }
 
         [Required(ErrorMessage = "O salario do colaborador é obrigatório.")]
         public decimal Salario { get; set; }
 
         [Required(ErrorMessage = "O departamento do colaborador é obrigatório.")]
-        public string Departamento { get; set; }
+        public DepartamentoEnum Departamento { get; set; }
     }
 }

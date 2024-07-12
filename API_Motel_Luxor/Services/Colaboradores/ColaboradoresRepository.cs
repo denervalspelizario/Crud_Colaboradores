@@ -63,9 +63,9 @@ namespace API_Motel_Luxor.Services.Colaboradores
                     colaborador.Telefone,
                     colaborador.Email,
                     dataAdmissao,
-                    colaborador.Cargo,
+                    colaborador.Cargo.ToString(),
                     colaborador.Salario,
-                    colaborador.Departamento,
+                    colaborador.Departamento.ToString(),
                     status
                      );
 
@@ -101,6 +101,9 @@ namespace API_Motel_Luxor.Services.Colaboradores
                     colaboradorEncontrado.salario,
                     colaboradorEncontrado.departamento
                     );
+
+
+                
 
                 // adicionando respostas de sucesso 
                 resposta.Dados = colaboradorResposta;

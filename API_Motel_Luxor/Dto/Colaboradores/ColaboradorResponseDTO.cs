@@ -1,4 +1,6 @@
 ﻿
+using API_Motel_Luxor.Enum;
+
 namespace API_Motel_Luxor.Dto.Colaboradores
 {
     public class ColaboradorResponseDTO
