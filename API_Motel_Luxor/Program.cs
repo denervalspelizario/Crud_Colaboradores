@@ -1,32 +1,30 @@
 using API_Motel_Luxor.Services.Colaboradores;
 using Microsoft.OpenApi.Models;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using Swashbuckle.AspNetCore.Filters;
+
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers()
-    .AddJsonOptions(options =>
-    {
-        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.KebabCaseUpper));
-    });
-
+builder.Services.AddControllers();
+    
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "API LUXOR", Version = "v1" });
-   
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "API de Luxor", Version = "v1" });
+    c.EnableAnnotations();
+    c.ExampleFilters();
 });
 
 
 // Indicando que ColaboradoresRepository recebe de herança(referenciada) a interface IColaboradoresRepository
 builder.Services.AddScoped<IColaboradoresRepository, ColaboradoresRepository>();
 
+builder.Services.AddSwaggerExamplesFromAssemblyOf<Program>();
 
 var app = builder.Build();
 
@@ -35,7 +33,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
     app.UseSwagger();
-    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API LUXOR v1"));
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API de Hotel Luxor v1"));
 }
 
 app.UseHttpsRedirection();

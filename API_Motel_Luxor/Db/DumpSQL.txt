@@ -15,12 +15,12 @@ CREATE DATABASE Luxor;
     data_nascimento DATE NOT NULL,
     cpf VARCHAR(11) UNIQUE NOT NULL,
     endereco TEXT NOT NULL,
-    sexo VARCHAR(50),
+    sexo INT NOT NULL,
     telefone VARCHAR(15),
     email VARCHAR(100) UNIQUE,
     data_admissao DATE NOT NULL,
-    cargo VARCHAR(50) NOT NULL,
+    cargo INT NOT NULL,
     salario NUMERIC(10, 2) NOT NULL,
-    departamento VARCHAR(50) NOT NULL,
+    departamento INT NOT NULL,
     status VARCHAR(20) DEFAULT 'Ativo'
 );

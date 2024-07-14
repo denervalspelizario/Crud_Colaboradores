@@ -2,12 +2,12 @@
 {
     public enum DepartamentoEnum
     {
-        Administrativo,
-        Gerencia,
-        LideresSetores,
-        Limpeza,
-        Manutencao,
-        Cozinha,
-        Logistica   
+        Administrativo = 1,
+        Gerencia = 2,
+        LideresSetores = 3,
+        Limpeza = 4,
+        Manutencao = 5,
+        Cozinha = 6,
+        Logistica = 7  
     }
 }

@@ -1,8 +1,7 @@
 ﻿using API_Motel_Luxor.Dto.Colaboradores;
 using API_Motel_Luxor.Services.Colaboradores;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Filters;
 
 namespace API_Motel_Luxor.Controllers
 {
@@ -21,7 +20,8 @@ namespace API_Motel_Luxor.Controllers
 
         [HttpPost]
         [Route("adicionarColaborador/")]
-        public async Task<IActionResult> AdicaoColaboradores([FromForm]ColaboradoresCreateDTO colaborador)
+        [SwaggerRequestExample(typeof(ColaboradoresCreateDTO), typeof(ColaboradoresExampleDTO))]
+        public async Task<IActionResult> AdicaoColaboradores(ColaboradoresCreateDTO colaborador)
         {
             var respostaRequisicao = await _repository.AdicaoColaborador(colaborador);
 

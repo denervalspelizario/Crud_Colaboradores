@@ -2,10 +2,10 @@
 {
     public enum SexoEnum
     {
-        Masculino,
-        Feminino,
-        NaoBinario,
-        Outro,
-        PrefiroNaoInformar
+        Masculino = 1,
+        Feminino = 2,
+        NaoBinario = 3,
+        Outro = 4,
+        PrefiroNaoInformar = 5
     }
 }

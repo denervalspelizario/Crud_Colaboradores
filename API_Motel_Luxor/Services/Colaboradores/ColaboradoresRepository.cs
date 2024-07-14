@@ -63,13 +63,13 @@ namespace API_Motel_Luxor.Services.Colaboradores
                     dataNascimento,
                     colaborador.Cpf,
                     colaborador.Endereco,
-                    colaborador.Sexo.ToString(),
+                    colaborador.Sexo,
                     colaborador.Telefone,
                     colaborador.Email,
                     dataAdmissao,
-                    colaborador.Cargo.ToString(),
+                    colaborador.Cargo,
                     colaborador.Salario,
-                    colaborador.Departamento.ToString(),
+                    colaborador.Departamento,
                     status
                      );
 
@@ -95,13 +95,13 @@ namespace API_Motel_Luxor.Services.Colaboradores
                     colaboradorEncontrado.data_nascimento.ToString("dd-MM-yyyy"),
                     colaboradorEncontrado.cpf,
                     colaboradorEncontrado.endereco,
-                    colaboradorEncontrado.sexo,
+                    colaboradorEncontrado.sexo.ToString(),
                     colaboradorEncontrado.telefone,
                     colaboradorEncontrado.email,
                     colaboradorEncontrado.data_admissao.ToString("dd-MM-yyyy"),
-                    colaboradorEncontrado.cargo,
+                    colaboradorEncontrado.cargo.ToString(),
                     colaboradorEncontrado.salario,
-                    colaboradorEncontrado.departamento
+                    colaboradorEncontrado.departamento.ToString()
                     );
 
 
