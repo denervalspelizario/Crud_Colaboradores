@@ -1,5 +1,6 @@
 ﻿
-using API_Motel_Luxor.Enum;
+
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace API_Motel_Luxor.Dto.Colaboradores
 {
@@ -7,12 +8,16 @@ namespace API_Motel_Luxor.Dto.Colaboradores
     {
         public int? Colaborador_id { get; set; }
         public string Nome { get; set; }
+        
+        [Column(TypeName = "date")]
         public string Data_nascimento { get; set; }
         public string Cpf { get; set; }
         public string Endereco { get; set; }
         public string Sexo { get; set; }
         public string Telefone { get; set; }
         public string Email { get; set; }
+
+        [Column(TypeName = "date")]
         public string Data_admissao { get; set; }
         public string Cargo { get; set; }
         public decimal Salario { get; set; }

@@ -36,10 +36,11 @@ namespace API_Motel_Luxor.Controllers
 
 
         [HttpGet]
-        [Route("listagemColaboradores/")]
-        public IActionResult ListagemColaboradores()
+        [Route("buscarColaborador/")]
+        public async Task<IActionResult> BuscarColaborador(int id)
         {
-            return Ok();
+            var respostaRequisicao = await _repository.BuscarColaborador(id);
+            return Ok(respostaRequisicao);
         }
     }
 }

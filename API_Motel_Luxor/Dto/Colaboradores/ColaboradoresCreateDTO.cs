@@ -1,6 +1,4 @@
 ﻿using API_Motel_Luxor.Enum;
-using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.Annotations;
 using System.ComponentModel.DataAnnotations;
 
 namespace API_Motel_Luxor.Dto.Colaboradores
