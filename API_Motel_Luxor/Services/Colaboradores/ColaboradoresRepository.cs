@@ -4,7 +4,6 @@ using API_Motel_Luxor.Model.Colaboradores;
 using API_Motel_Luxor.Model.Response;
 using Microsoft.EntityFrameworkCore;
 
-
 namespace API_Motel_Luxor.Services.Colaboradores
 {
     public class ColaboradoresRepository : IColaboradoresRepository
@@ -169,6 +168,56 @@ namespace API_Motel_Luxor.Services.Colaboradores
                 throw new Exception(mensagemErro);
             }
 
+        }
+
+        public async Task<ResponseList<List<ColaboradoresResponseListDTO>>> ListarColaboradores()
+        {
+            // formatação de resposta
+            var resposta = new ResponseList<List<ColaboradoresResponseListDTO>>();
+
+            try
+            {
+                // objeto com colaboradores do banco
+                var listaColaboradores = await _context.Colaboradores.ToListAsync();
+
+
+
+                // objeto com Lista de colaboradores tipo ColaboradoresResponseListDTO
+                var listaColaboradoresResposta = new List<ColaboradoresResponseListDTO>();
+
+                // adicionando todos os adms na lista de objetos respostaFormatada
+                foreach (var colaborador in listaColaboradores)
+                {
+                    if (colaborador.status == "Ativo")
+                    {
+                        var colaboradorFormatado = new ColaboradoresResponseListDTO
+                        (
+                            colaborador.colaborador_id,
+                            colaborador.nome,
+                            colaborador.email,
+                            colaborador.cargo.ToString(),
+                            colaborador.departamento.ToString()
+                        );
+
+                        listaColaboradoresResposta.Add(colaboradorFormatado);
+                    }
+                }
+
+                // resposta estrutura
+                resposta.Dados = listaColaboradoresResposta;
+                resposta.Mensagem = "Requisição efetuado com sucesso";
+
+                return resposta;
+
+            }
+            catch (Exception erro)
+            {
+                string mensagemErro = erro.Message;
+                throw new Exception(mensagemErro);
+            }
+
+
+            throw new NotImplementedException();
         }
     }
 }
