@@ -8,23 +8,23 @@ namespace API_Motel_Luxor.Model.Colaboradores
     public class ColaboradoresModel
     {
         [Key]
-        public int? colaborador_id { get; private set; }
-        public string nome { get; private set; }
+        public int? colaborador_id { get;  set; }
+        public string nome { get;  set; }
 
         [Column(TypeName = "date")]
-        public DateTime data_nascimento { get; private set; }
-        public string cpf { get; private set; }
-        public string endereco { get; private set; }
-        public SexoEnum sexo { get; private set; }
-        public string telefone { get; private set; }
-        public string email { get; private set; }
+        public DateTime data_nascimento { get;  set; }
+        public string cpf { get;  set; }
+        public string endereco { get;  set; }
+        public SexoEnum sexo { get;  set; }
+        public string telefone { get;  set; }
+        public string email { get;  set; }
 
         [Column(TypeName = "date")]
-        public DateTime data_admissao { get; private set; }
-        public CargoEnum cargo { get; private set; }
-        public decimal salario { get; private set; }
-        public DepartamentoEnum departamento { get; private set; }
-        public string status { get; private set; }
+        public DateTime data_admissao { get;  set; }
+        public CargoEnum cargo { get;  set; }
+        public decimal salario { get;  set; }
+        public DepartamentoEnum departamento { get;  set; }
+        public string status { get;  set; }
 
         public ColaboradoresModel(
             string nome, DateTime data_nascimento, string cpf, string endereco

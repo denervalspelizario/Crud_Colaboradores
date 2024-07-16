@@ -131,7 +131,7 @@ namespace API_Motel_Luxor.Services.Colaboradores
                 var colaboradorEncontrado = await _context.Colaboradores.FindAsync(id);
 
                 // validando se user foi encontrado
-                if (colaboradorEncontrado is null)
+                if (colaboradorEncontrado is null || colaboradorEncontrado.status == "Inativo")
                 {
                     resposta.Mensagem = "Colaborador não encontrado";
                     return resposta;
@@ -215,9 +215,36 @@ namespace API_Motel_Luxor.Services.Colaboradores
                 string mensagemErro = erro.Message;
                 throw new Exception(mensagemErro);
             }
-
-
-            throw new NotImplementedException();
         }
+
+        public async Task<ResponseMessagem> DesabilitarColaborador(int id)
+        {
+            try
+            {
+                // resposta formatada
+                var resposta = new ResponseMessagem();
+
+                
+                // obtendo a entidade pelo id
+                var colaboradorEncontrado = await _context.Colaboradores.FirstOrDefaultAsync(x => x.colaborador_id == id);
+
+                // alteração do status da entidade                   
+                colaboradorEncontrado.status = "Inativo";
+
+
+                // salvando os dados
+                _context.SaveChanges();
+
+                resposta.Mensagem = "Cadastro do colaborador desativado com sucesso";
+                return resposta;
+
+            }
+            catch (Exception erro)
+            {
+                string mensagemErro = erro.Message;
+                throw new Exception(mensagemErro);
+            }    
+        }
+
     }
 }

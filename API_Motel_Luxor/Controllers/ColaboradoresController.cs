@@ -43,6 +43,7 @@ namespace API_Motel_Luxor.Controllers
             return Ok(respostaRequisicao);
         }
 
+
         [HttpGet]
         [Route("listarColaboradores/")]
         public async Task<IActionResult> listarColaboradores()
@@ -50,5 +51,17 @@ namespace API_Motel_Luxor.Controllers
             var respostaRequisicao = await _repository.ListarColaboradores();
             return Ok(respostaRequisicao);
         }
+
+        [HttpPatch]
+        [Route("desabilitarColaborador/{id:int}")]
+        public async Task<IActionResult> DesabilitarColaborador(int id)
+        {
+
+            //var resposta = await _repository.Disable(id);
+            var resposta = await _repository.DesabilitarColaborador(id);
+
+            return Ok(resposta);
+        }
+
     }
 }
