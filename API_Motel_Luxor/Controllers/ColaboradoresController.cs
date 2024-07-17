@@ -57,10 +57,29 @@ namespace API_Motel_Luxor.Controllers
         public async Task<IActionResult> DesabilitarColaborador(int id)
         {
 
-            //var resposta = await _repository.Disable(id);
-            var resposta = await _repository.DesabilitarColaborador(id);
+            var respostaRequisicao = await _repository.DesabilitarColaborador(id);
 
-            return Ok(resposta);
+            if (respostaRequisicao.Mensagem != "Cadastro do colaborador desativado com sucesso")
+            {
+                return BadRequest(respostaRequisicao.Mensagem);
+            }
+
+            return Ok(respostaRequisicao);
+        }
+
+
+        [HttpPatch]
+        [Route("habilitarColaborador/{id:int}")]
+        public async Task<IActionResult> HabilitarColaborador(int id)
+        {
+            var respostaRequisicao = await _repository.HabilitarColaborador(id);
+
+            if (respostaRequisicao.Mensagem != "Cadastro do colaborador ativado com sucesso")
+            {
+                return BadRequest(respostaRequisicao.Mensagem);
+            }
+
+            return Ok(respostaRequisicao);
         }
 
     }

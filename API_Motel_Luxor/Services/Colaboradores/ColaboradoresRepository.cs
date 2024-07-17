@@ -228,6 +228,20 @@ namespace API_Motel_Luxor.Services.Colaboradores
                 // obtendo a entidade pelo id
                 var colaboradorEncontrado = await _context.Colaboradores.FirstOrDefaultAsync(x => x.colaborador_id == id);
 
+                // validando se user foi encontrado
+                if (colaboradorEncontrado is null)
+                {
+                    resposta.Mensagem = "Colaborador não encontrado";
+                    return resposta;
+                }
+
+                // validando se colaborador já esta ativado
+                if (colaboradorEncontrado.status == "Inativo")
+                {
+                    resposta.Mensagem = "cadastro do colaborador já está inabilitado";
+                    return resposta;
+                }
+
                 // alteração do status da entidade                   
                 colaboradorEncontrado.status = "Inativo";
 
@@ -244,6 +258,50 @@ namespace API_Motel_Luxor.Services.Colaboradores
                 string mensagemErro = erro.Message;
                 throw new Exception(mensagemErro);
             }    
+        }
+
+        public async Task<ResponseMessagem> HabilitarColaborador(int id)
+        {
+            try
+            {
+                // resposta formatada
+                var resposta = new ResponseMessagem();
+
+
+                // obtendo a entidade pelo id
+                var colaboradorEncontrado = await _context.Colaboradores.FirstOrDefaultAsync(x => x.colaborador_id == id);
+
+                // validando se user foi encontrado
+                if (colaboradorEncontrado is null)
+                {
+                    resposta.Mensagem = "Colaborador não encontrado";
+                    return resposta;
+                }
+
+                // validando se colaborador já esta ativado
+                if (colaboradorEncontrado.status == "Ativo")
+                {
+                    resposta.Mensagem = "cadastro do colaborador já está ativado";
+                    return resposta;
+                }
+
+
+                // alteração do status da entidade                   
+                colaboradorEncontrado.status = "Ativo";
+
+
+                // salvando os dados
+                _context.SaveChanges();
+
+                resposta.Mensagem = "Cadastro do colaborador ativado com sucesso";
+                return resposta;
+
+            }
+            catch (Exception erro)
+            {
+                string mensagemErro = erro.Message;
+                throw new Exception(mensagemErro);
+            }
         }
 
     }

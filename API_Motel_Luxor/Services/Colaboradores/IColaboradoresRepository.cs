@@ -11,5 +11,6 @@ namespace API_Motel_Luxor.Services.Colaboradores
 
         Task<ResponseList<List<ColaboradoresResponseListDTO>>> ListarColaboradores();
         Task<ResponseMessagem> DesabilitarColaborador(int id);
+        Task<ResponseMessagem> HabilitarColaborador(int id);
     }
 }
