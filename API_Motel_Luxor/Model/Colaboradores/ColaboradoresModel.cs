@@ -8,7 +8,7 @@ namespace API_Motel_Luxor.Model.Colaboradores
     public class ColaboradoresModel
     {
         [Key]
-        public int? colaborador_id { get;  set; }
+        public int colaborador_id { get;  set; }
         public string nome { get;  set; }
 
         [Column(TypeName = "date")]
@@ -44,5 +44,27 @@ namespace API_Motel_Luxor.Model.Colaboradores
             this.departamento = departamento;
             this.status = status;
         }
+
+
+        public ColaboradoresModel(int colaborador_id ,string nome, DateTime data_nascimento, string cpf, string endereco
+            , SexoEnum sexo, string telefone, string email, DateTime data_admissao, CargoEnum cargo,
+            decimal salario, DepartamentoEnum departamento, string status)
+        {
+            this.colaborador_id = colaborador_id;   
+            this.nome = nome;
+            this.data_nascimento = data_nascimento;
+            this.cpf = cpf;
+            this.endereco = endereco;
+            this.sexo = sexo;
+            this.telefone = telefone;
+            this.email = email;
+            this.data_admissao = data_admissao;
+            this.cargo = cargo;
+            this.salario = salario;
+            this.departamento = departamento;
+            this.status = status;
+        }
+
+        
     }
 }

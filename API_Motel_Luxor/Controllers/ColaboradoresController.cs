@@ -52,6 +52,7 @@ namespace API_Motel_Luxor.Controllers
             return Ok(respostaRequisicao);
         }
 
+
         [HttpPatch]
         [Route("desabilitarColaborador/{id:int}")]
         public async Task<IActionResult> DesabilitarColaborador(int id)
@@ -68,6 +69,7 @@ namespace API_Motel_Luxor.Controllers
         }
 
 
+
         [HttpPatch]
         [Route("habilitarColaborador/{id:int}")]
         public async Task<IActionResult> HabilitarColaborador(int id)
@@ -82,5 +84,37 @@ namespace API_Motel_Luxor.Controllers
             return Ok(respostaRequisicao);
         }
 
+
+
+        [HttpPut]
+        [Route("atualizarColaborador/")]
+        [SwaggerRequestExample(typeof(ColaboradorUpdateDTO), typeof(ColaboradoresExampleUpdateDTO))]
+        public async Task<IActionResult> AtualizarColaborador(ColaboradorUpdateDTO colaborador)
+        {
+            var respostaRequisicao = await _repository.AtualizarColaborador(colaborador);
+
+            // colaborador nao encontrado
+            if (respostaRequisicao.Mensagem == "Colaborador não encontrado")
+            {
+                return NotFound(respostaRequisicao.Mensagem);
+            }
+
+            // dados duplicados
+            if (respostaRequisicao.Mensagem == "Email já cadastrado por outro colaborador" ||
+                respostaRequisicao.Mensagem == "Cpf já cadastrado por outro colaborador" ||
+                respostaRequisicao.Mensagem == "Telefone já cadastrado por outro colaborador")
+            {
+                return Conflict(respostaRequisicao.Mensagem);
+            }
+
+
+            // erro desconhecido
+            if (respostaRequisicao.Mensagem != "Dados do colaborador atualizado com Sucesso")
+            {
+                return BadRequest(respostaRequisicao.Mensagem);
+            }
+
+            return Ok(respostaRequisicao);
+        }
     }
 }
