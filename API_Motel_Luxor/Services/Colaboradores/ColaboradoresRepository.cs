@@ -417,5 +417,42 @@ namespace API_Motel_Luxor.Services.Colaboradores
 
             }
         }
+
+        public async Task<ResponseMessagem> DeletarColaborador(int id)
+        {
+            // resposta formatada
+            var resposta = new ResponseMessagem();
+
+            try
+            {
+
+                // obtendo a entidade pelo id
+                var colaboradorEncontrado = await _context.Colaboradores.FirstOrDefaultAsync(x => x.colaborador_id == id);
+
+                // validando se user foi encontrado
+                if (colaboradorEncontrado is null)
+                {
+                    resposta.Mensagem = "Colaborador não encontrado";
+                    return resposta;
+                }
+
+
+                // removendo entidade do bd
+                _context.Colaboradores.Remove(colaboradorEncontrado);
+
+                // salvando os dados
+                _context.SaveChanges();
+
+                resposta.Mensagem = "Dados do colaborador deletado com sucesso";
+                return resposta;
+
+            }
+            catch (Exception erro)
+            {
+                string mensagemErro = erro.Message;
+                resposta.Mensagem = "Erro interno na solicitação";
+                throw new Exception(mensagemErro);
+            }
+        }
     }
 }

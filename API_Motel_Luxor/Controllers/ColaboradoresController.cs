@@ -116,5 +116,31 @@ namespace API_Motel_Luxor.Controllers
 
             return Ok(respostaRequisicao);
         }
+
+
+
+        
+        [HttpDelete]
+        [Route("deletarColaborador/{id:int}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+
+            var respostaRequisicao = await _repository.DeletarColaborador(id);
+
+            // colaborador nao encontrado
+            if (respostaRequisicao.Mensagem == "Colaborador não encontrado")
+            {
+                return NotFound(respostaRequisicao.Mensagem);
+            }
+
+            // erro interno na requisição
+            if (respostaRequisicao.Mensagem != "Dados do colaborador deletado com sucesso")
+            {
+                return NotFound(respostaRequisicao.Mensagem);
+            }
+
+
+            return NoContent();
+        }
     }
 }

@@ -11,5 +11,6 @@ namespace API_Motel_Luxor.Services.Colaboradores
         Task<ResponseMessagem> DesabilitarColaborador(int id);
         Task<ResponseMessagem> HabilitarColaborador(int id);
         Task<Response<ColaboradorResponseDTO>> AtualizarColaborador(ColaboradorUpdateDTO administrador);
+        Task<ResponseMessagem> DeletarColaborador(int id);
     }
 }
