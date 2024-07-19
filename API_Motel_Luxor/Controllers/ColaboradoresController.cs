@@ -25,7 +25,15 @@ namespace API_Motel_Luxor.Controllers
         {
             var respostaRequisicao = await _repository.AdicaoColaborador(colaborador);
 
-            if(respostaRequisicao.Mensagem != "Dados Adicionandos com Sucesso")
+            if (respostaRequisicao.Mensagem == "Email já cadastrado por outro colaborador" ||
+                respostaRequisicao.Mensagem == "Cpf já cadastrado por outro colaborador" ||
+                respostaRequisicao.Mensagem == "Telefone já cadastrado por outro colaborador")
+            {
+                return Conflict(respostaRequisicao.Mensagem);
+            }
+
+
+            if (respostaRequisicao.Mensagem != "Dados Adicionandos com Sucesso")
             {
                 return BadRequest(respostaRequisicao.Mensagem);
             }

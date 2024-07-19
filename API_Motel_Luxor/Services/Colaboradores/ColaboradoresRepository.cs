@@ -33,7 +33,7 @@ namespace API_Motel_Luxor.Services.Colaboradores
 
                 if (emailDuplicado != null)
                 {
-                    resposta.Mensagem = "Email já cadastrado";
+                    resposta.Mensagem = "Email já cadastrado por outro colaborador";
                     return resposta;
                 }
 
@@ -42,7 +42,7 @@ namespace API_Motel_Luxor.Services.Colaboradores
 
                 if (telefoneDuplicado != null)
                 {
-                    resposta.Mensagem = "Telefone já cadastrado";
+                    resposta.Mensagem = "Telefone já cadastrado por outro colaborador";
                     return resposta;
                 }
 
@@ -51,7 +51,7 @@ namespace API_Motel_Luxor.Services.Colaboradores
 
                 if (cpfDuplicado != null)
                 {
-                    resposta.Mensagem = "Cpf já cadastrado";
+                    resposta.Mensagem = "Cpf já cadastrado por outro colaborador";
                     return resposta;
                 }
 
