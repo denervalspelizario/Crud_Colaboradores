@@ -258,9 +258,9 @@ namespace API_Motel_Luxor.Services.Colaboradores
             }
             catch (Exception erro)
             {
-                string mensagemErro = erro.Message;
                 resposta.Mensagem = "Erro interno na solicitação";
-                throw new Exception(mensagemErro);
+                _logger.LogError(erro, "Ocorreu um erro ao desabilitar o colaborador com ID {ColaboradorId}", id);
+                return resposta;
             }    
         }
 

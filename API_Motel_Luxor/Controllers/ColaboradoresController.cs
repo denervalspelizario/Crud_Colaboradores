@@ -82,12 +82,15 @@ namespace API_Motel_Luxor.Controllers
         {
 
             var respostaRequisicao = await _repository.DesabilitarColaborador(id);
+            _logger.LogInformation("Recebida requisição para desabilitar colaborador com ID {id}", id);
 
             if (respostaRequisicao.Mensagem != "Cadastro do colaborador desativado com sucesso")
             {
+                _logger.LogWarning("Colaborador com ID {id} não encontrado", id);
                 return BadRequest(respostaRequisicao.Mensagem);
             }
 
+            _logger.LogInformation("Colaborador com ID {id} desabilitado com sucesso", id);
             return Ok(respostaRequisicao);
         }
 
