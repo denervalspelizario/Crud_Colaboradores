@@ -12,9 +12,14 @@ namespace API_Motel_Luxor.Controllers
     {
         // chamando interface com os metodos de requisicao
         private readonly IColaboradoresRepository _repository;
-        public ColaboradoresController(IColaboradoresRepository repository)
+
+        // teste logger
+        private readonly ILogger<ColaboradoresController> _logger;
+
+        public ColaboradoresController(IColaboradoresRepository repository, ILogger<ColaboradoresController> logger)
         {
             _repository = repository;
+            _logger = logger;
         }
 
 
@@ -44,10 +49,20 @@ namespace API_Motel_Luxor.Controllers
 
 
         [HttpGet]
-        [Route("buscarColaborador/")]
+        [Route("buscarColaborador/{id:int}")]
         public async Task<IActionResult> BuscarColaborador(int id)
         {
+            _logger.LogInformation("Recebida requisição para buscar colaborador com ID {id}", id);
             var respostaRequisicao = await _repository.BuscarColaborador(id);
+
+            // colaborador nao encontrado
+            if (respostaRequisicao.Mensagem == "Colaborador não encontrado")
+            {
+                _logger.LogWarning("Colaborador com ID {id} não encontrado", id);
+                return NotFound(respostaRequisicao.Mensagem);
+            }
+
+            _logger.LogInformation("Colaborador com ID {id} encontrado com sucesso", id);
             return Ok(respostaRequisicao);
         }
 

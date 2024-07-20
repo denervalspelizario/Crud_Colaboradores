@@ -10,6 +10,7 @@ namespace API_Motel_Luxor.Services.Colaboradores
     {
        
         private readonly ConnectionContext _context = new ConnectionContext();
+        private readonly ILogger _logger;
 
         public async Task<Response<ColaboradorResponseDTO>> AdicaoColaborador(ColaboradoresCreateDTO colaborador)
         {
@@ -165,9 +166,10 @@ namespace API_Motel_Luxor.Services.Colaboradores
             }
             catch (Exception erro)
             {
-                string mensagemErro = erro.Message;
                 resposta.Mensagem = "Erro interno na solicitação";
-                throw new Exception(mensagemErro);
+                resposta.Status = "Erro";
+                _logger.LogError(erro, "Ocorreu um erro ao buscar o colaborador com ID {ColaboradorId}", id);
+                return resposta;
             }
 
         }
