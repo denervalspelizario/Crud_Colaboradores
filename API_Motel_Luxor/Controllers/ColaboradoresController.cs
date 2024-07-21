@@ -76,7 +76,23 @@ namespace API_Motel_Luxor.Controllers
         [Route("listarColaboradores/")]
         public async Task<IActionResult> listarColaboradores()
         {
+            _logger.LogInformation("Recebida requisição para listar colaboradores");
             var respostaRequisicao = await _repository.ListarColaboradores();
+
+            
+            if(respostaRequisicao.Mensagem == "Nenhum colaborador cadastrado")
+            {
+                _logger.LogWarning("Nenhum colaborador cadastrado");
+                return NotFound(respostaRequisicao.Mensagem);
+            }
+
+            if (respostaRequisicao.Mensagem == "Erro na solicitação de listagem de colaboradores")
+            {
+                return BadRequest(respostaRequisicao.Mensagem);
+            }
+
+
+            _logger.LogInformation("Listagem de colaboradores concluida com sucesso");
             return Ok(respostaRequisicao);
         }
 

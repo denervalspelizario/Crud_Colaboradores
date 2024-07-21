@@ -182,10 +182,17 @@ namespace API_Motel_Luxor.Services.Colaboradores
                 // objeto com colaboradores do banco
                 var listaColaboradores = await _context.Colaboradores.ToListAsync();
 
-
+                
+                if(listaColaboradores == null || listaColaboradores.Count == 0)
+                {
+                    resposta.Mensagem = "Nenhum colaborador cadastrado";
+                    return resposta;
+                }
 
                 // objeto com Lista de colaboradores tipo ColaboradoresResponseListDTO
                 var listaColaboradoresResposta = new List<ColaboradoresResponseListDTO>();
+
+                
 
                 // adicionando todos os adms na lista de objetos respostaFormatada
                 foreach (var colaborador in listaColaboradores)
@@ -214,9 +221,9 @@ namespace API_Motel_Luxor.Services.Colaboradores
             }
             catch (Exception erro)
             {
-                string mensagemErro = erro.Message;
-                resposta.Mensagem = "Erro interno na solicitação";
-                throw new Exception(mensagemErro);
+                resposta.Mensagem = "Erro na solicitação de listagem de colaboradores";
+                _logger.LogError(erro, "Erro na solicitação de listagem de colaboradores");
+                return resposta;
             }
         }
 
