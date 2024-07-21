@@ -101,13 +101,20 @@ namespace API_Motel_Luxor.Controllers
         [Route("desabilitarColaborador/{id:int}")]
         public async Task<IActionResult> DesabilitarColaborador(int id)
         {
-
-            var respostaRequisicao = await _repository.DesabilitarColaborador(id);
             _logger.LogInformation("Recebida requisição para desabilitar colaborador com ID {id}", id);
+            var respostaRequisicao = await _repository.DesabilitarColaborador(id);
+         
+
+            if (respostaRequisicao.Mensagem == "Colaborador não encontrado")
+            {
+                _logger.LogWarning("Erro ao desabilitar colaborador: {Mensagem}", respostaRequisicao.Mensagem);
+                return NotFound(respostaRequisicao.Mensagem);
+            }
+
 
             if (respostaRequisicao.Mensagem != "Cadastro do colaborador desativado com sucesso")
             {
-                _logger.LogWarning("Colaborador com ID {id} não encontrado", id);
+                _logger.LogWarning("Erro ao desabilitar colaborador: {Mensagem}", respostaRequisicao.Mensagem);
                 return BadRequest(respostaRequisicao.Mensagem);
             }
 
@@ -121,13 +128,22 @@ namespace API_Motel_Luxor.Controllers
         [Route("habilitarColaborador/{id:int}")]
         public async Task<IActionResult> HabilitarColaborador(int id)
         {
+            _logger.LogInformation("Recebida requisição para habilitar colaborador com ID {id}", id);
             var respostaRequisicao = await _repository.HabilitarColaborador(id);
+
+            if (respostaRequisicao.Mensagem == "Colaborador não encontrado")
+            {
+                _logger.LogWarning("Erro ao habilitar colaborador: {Mensagem}", respostaRequisicao.Mensagem);
+                return NotFound(respostaRequisicao.Mensagem);
+            }
 
             if (respostaRequisicao.Mensagem != "Cadastro do colaborador ativado com sucesso")
             {
+                _logger.LogWarning("Erro ao habilitar colaborador: {Mensagem}", respostaRequisicao.Mensagem);
                 return BadRequest(respostaRequisicao.Mensagem);
             }
 
+            _logger.LogInformation("Colaborador com ID {id} abilitado com sucesso", id);
             return Ok(respostaRequisicao);
         }
 
