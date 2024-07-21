@@ -143,7 +143,7 @@ namespace API_Motel_Luxor.Controllers
                 return BadRequest(respostaRequisicao.Mensagem);
             }
 
-            _logger.LogInformation("Colaborador com ID {id} abilitado com sucesso", id);
+            _logger.LogInformation("Colaborador com ID {id} habilitado com sucesso", id);
             return Ok(respostaRequisicao);
         }
 
@@ -187,22 +187,24 @@ namespace API_Motel_Luxor.Controllers
         [Route("deletarColaborador/{id:int}")]
         public async Task<IActionResult> Delete(int id)
         {
-
+            _logger.LogInformation("Recebida requisição para deletar dados de um colaborador com ID {id}", id);
             var respostaRequisicao = await _repository.DeletarColaborador(id);
 
             // colaborador nao encontrado
             if (respostaRequisicao.Mensagem == "Colaborador não encontrado")
             {
+                _logger.LogWarning("Erro ao deletar dados do colaborador: {id}", id);
                 return NotFound(respostaRequisicao.Mensagem);
             }
 
             // erro interno na requisição
             if (respostaRequisicao.Mensagem != "Dados do colaborador deletado com sucesso")
             {
-                return NotFound(respostaRequisicao.Mensagem);
+                _logger.LogWarning("Erro ao deletar dados do colaborador: {Mensagem}", respostaRequisicao.Mensagem);
+                return BadRequest(respostaRequisicao.Mensagem);
             }
 
-
+            _logger.LogInformation("{Mensagem}", respostaRequisicao.Mensagem);
             return NoContent();
         }
     }

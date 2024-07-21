@@ -432,7 +432,6 @@ namespace API_Motel_Luxor.Services.Colaboradores
 
             try
             {
-
                 // obtendo a entidade pelo id
                 var colaboradorEncontrado = await _context.Colaboradores.FirstOrDefaultAsync(x => x.colaborador_id == id);
 
@@ -456,9 +455,9 @@ namespace API_Motel_Luxor.Services.Colaboradores
             }
             catch (Exception erro)
             {
-                string mensagemErro = erro.Message;
-                resposta.Mensagem = "Erro interno na solicitação";
-                throw new Exception(mensagemErro);
+                resposta.Mensagem = "Erro interno na solicitação para deletar dados do colaborador";
+                _logger.LogError(erro, "Ocorreu um erro ao tentar deletar o colaborador com ID {id}", id);
+                return resposta;
             }
         }
     }
