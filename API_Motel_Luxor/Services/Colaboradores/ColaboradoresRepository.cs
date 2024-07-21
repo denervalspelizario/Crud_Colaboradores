@@ -105,8 +105,6 @@ namespace API_Motel_Luxor.Services.Colaboradores
                     );
 
 
-                
-
                 // adicionando respostas de sucesso 
                 resposta.Dados = colaboradorResposta;
                 resposta.Status = colaboradorEncontrado.status;
@@ -117,9 +115,9 @@ namespace API_Motel_Luxor.Services.Colaboradores
             }
             catch (Exception erro)
             {
-                string mensagemErro = erro.Message;
-                resposta.Mensagem = "Erro interno na solicitação";
-                throw new Exception(mensagemErro);
+                resposta.Mensagem = "Erro interno na solicitação de cadastro de colaborador";
+                _logger.LogError(erro, "Ocorreu um erro ao cadastrar o colaborador {Nome}", colaborador.Nome);
+                return resposta;
             }
         }
 

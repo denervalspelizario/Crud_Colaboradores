@@ -1,6 +1,7 @@
 ﻿using API_Motel_Luxor.Dto.Colaboradores;
 using API_Motel_Luxor.Services.Colaboradores;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Filters;
 
 namespace API_Motel_Luxor.Controllers
@@ -13,7 +14,7 @@ namespace API_Motel_Luxor.Controllers
         // chamando interface com os metodos de requisicao
         private readonly IColaboradoresRepository _repository;
 
-        // teste logger
+        // loger
         private readonly ILogger<ColaboradoresController> _logger;
 
         public ColaboradoresController(IColaboradoresRepository repository, ILogger<ColaboradoresController> logger)
@@ -28,12 +29,15 @@ namespace API_Motel_Luxor.Controllers
         [SwaggerRequestExample(typeof(ColaboradoresCreateDTO), typeof(ColaboradoresExampleDTO))]
         public async Task<IActionResult> AdicaoColaboradores(ColaboradoresCreateDTO colaborador)
         {
+            _logger.LogInformation("Recebida requisição para criar cadastro de colaborador {Nome}", colaborador.Nome);
             var respostaRequisicao = await _repository.AdicaoColaborador(colaborador);
+
 
             if (respostaRequisicao.Mensagem == "Email já cadastrado por outro colaborador" ||
                 respostaRequisicao.Mensagem == "Cpf já cadastrado por outro colaborador" ||
                 respostaRequisicao.Mensagem == "Telefone já cadastrado por outro colaborador")
             {
+                _logger.LogWarning("Dados Duplicados: {Mensagem}", respostaRequisicao.Mensagem);
                 return Conflict(respostaRequisicao.Mensagem);
             }
 
@@ -43,7 +47,8 @@ namespace API_Motel_Luxor.Controllers
                 return BadRequest(respostaRequisicao.Mensagem);
             }
 
-            return Ok(respostaRequisicao);
+            _logger.LogInformation("Colaborador  {Nome} cadastrado com sucesso", respostaRequisicao.Dados.Nome);
+            return Created(string.Empty,respostaRequisicao);
         }
 
 
