@@ -165,8 +165,7 @@ namespace API_Motel_Luxor.Services.Colaboradores
             catch (Exception erro)
             {
                 resposta.Mensagem = "Erro interno na solicitação";
-                resposta.Status = "Erro";
-                _logger.LogError(erro, "Ocorreu um erro ao buscar o colaborador com ID {ColaboradorId}", id);
+                _logger.LogError(erro, "Ocorreu um erro ao buscar o colaborador com ID {id}", id);
                 return resposta;
             }
 
@@ -264,7 +263,7 @@ namespace API_Motel_Luxor.Services.Colaboradores
             catch (Exception erro)
             {
                 resposta.Mensagem = "Erro interno na solicitação";
-                _logger.LogError(erro, "Ocorreu um erro ao desabilitar o colaborador com ID {ColaboradorId}", id);
+                _logger.LogError(erro, "Ocorreu um erro ao desabilitar o colaborador com ID {id}", id);
                 return resposta;
             }    
         }
@@ -288,7 +287,7 @@ namespace API_Motel_Luxor.Services.Colaboradores
                 // validando se colaborador já esta ativado
                 if (colaboradorEncontrado.status == "Ativo")
                 {
-                    resposta.Mensagem = "cadastro do colaborador já está ativado";
+                    resposta.Mensagem = "cadastro do colaborador já está habilitado";
                     return resposta;
                 }
 
@@ -307,7 +306,7 @@ namespace API_Motel_Luxor.Services.Colaboradores
             catch (Exception erro)
             {
                 resposta.Mensagem = "Erro interno na solicitação";
-                _logger.LogError(erro, "Ocorreu um erro ao desabilitar o colaborador com ID {ColaboradorId}", id);
+                _logger.LogError(erro, "Ocorreu um erro ao tentar habilitar o colaborador com ID {id}", id);
                 return resposta;
             }
         }
@@ -418,9 +417,9 @@ namespace API_Motel_Luxor.Services.Colaboradores
             }
             catch (Exception erro)
             {
-                string mensagemErro = erro.Message;
-                resposta.Mensagem = "Erro interno na solicitação";
-                throw new Exception(mensagemErro);
+                resposta.Mensagem = "Erro interno na solicitação de autalizar dados do colaborador";
+                _logger.LogError(erro, "Ocorreu um erro ao tentar atualizar o colaborador com ID {id}", colaborador.Id);
+                return resposta;
 
             }
         }

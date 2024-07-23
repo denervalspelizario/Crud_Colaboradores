@@ -42,10 +42,11 @@ namespace API_Motel_Luxor.Controllers
             }
 
 
-            if (respostaRequisicao.Mensagem != "Dados Adicionandos com Sucesso")
+            if (respostaRequisicao.Mensagem == "Erro interno na solicitação de cadastro de colaborador")
             {
-                return BadRequest(respostaRequisicao.Mensagem);
+                return StatusCode(StatusCodes.Status500InternalServerError, respostaRequisicao.Mensagem);
             }
+
 
             _logger.LogInformation("Colaborador  {Nome} cadastrado com sucesso", respostaRequisicao.Dados.Nome);
             return Created(string.Empty,respostaRequisicao);
@@ -67,6 +68,11 @@ namespace API_Motel_Luxor.Controllers
                 return NotFound(respostaRequisicao.Mensagem);
             }
 
+            if (respostaRequisicao.Mensagem == "Erro interno na solicitação")
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, respostaRequisicao.Mensagem);
+            }
+
             _logger.LogInformation("Colaborador com ID {id} encontrado com sucesso", id);
             return Ok(respostaRequisicao);
         }
@@ -86,11 +92,11 @@ namespace API_Motel_Luxor.Controllers
                 return NotFound(respostaRequisicao.Mensagem);
             }
 
+
             if (respostaRequisicao.Mensagem == "Erro na solicitação de listagem de colaboradores")
             {
-                return BadRequest(respostaRequisicao.Mensagem);
+                return StatusCode(StatusCodes.Status500InternalServerError, respostaRequisicao.Mensagem);
             }
-
 
             _logger.LogInformation("Listagem de colaboradores concluida com sucesso");
             return Ok(respostaRequisicao);
@@ -111,11 +117,16 @@ namespace API_Motel_Luxor.Controllers
                 return NotFound(respostaRequisicao.Mensagem);
             }
 
-
-            if (respostaRequisicao.Mensagem != "Cadastro do colaborador desativado com sucesso")
+            if(respostaRequisicao.Mensagem == "cadastro do colaborador já está inabilitado")
             {
                 _logger.LogWarning("Erro ao desabilitar colaborador: {Mensagem}", respostaRequisicao.Mensagem);
                 return BadRequest(respostaRequisicao.Mensagem);
+            }
+
+
+            if (respostaRequisicao.Mensagem == "Erro interno na solicitação")
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, respostaRequisicao.Mensagem);
             }
 
             _logger.LogInformation("Colaborador com ID {id} desabilitado com sucesso", id);
@@ -137,10 +148,15 @@ namespace API_Motel_Luxor.Controllers
                 return NotFound(respostaRequisicao.Mensagem);
             }
 
-            if (respostaRequisicao.Mensagem != "Cadastro do colaborador ativado com sucesso")
+            if (respostaRequisicao.Mensagem == "cadastro do colaborador já está habilitado")
             {
                 _logger.LogWarning("Erro ao habilitar colaborador: {Mensagem}", respostaRequisicao.Mensagem);
                 return BadRequest(respostaRequisicao.Mensagem);
+            }
+
+            if (respostaRequisicao.Mensagem == "Erro interno na solicitação")
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, respostaRequisicao.Mensagem);
             }
 
             _logger.LogInformation("Colaborador com ID {id} habilitado com sucesso", id);
@@ -171,10 +187,10 @@ namespace API_Motel_Luxor.Controllers
             }
 
 
-            // erro desconhecido
-            if (respostaRequisicao.Mensagem != "Dados do colaborador atualizado com Sucesso")
+            // erro interno na requisição
+            if (respostaRequisicao.Mensagem == "Erro interno na solicitação de autalizar dados do colaborador")
             {
-                return BadRequest(respostaRequisicao.Mensagem);
+                return StatusCode(StatusCodes.Status500InternalServerError, respostaRequisicao.Mensagem);
             }
 
             return Ok(respostaRequisicao);
@@ -198,10 +214,9 @@ namespace API_Motel_Luxor.Controllers
             }
 
             // erro interno na requisição
-            if (respostaRequisicao.Mensagem != "Dados do colaborador deletado com sucesso")
+            if (respostaRequisicao.Mensagem == "Erro interno na solicitação para deletar dados do colaborador")
             {
-                _logger.LogWarning("Erro ao deletar dados do colaborador: {Mensagem}", respostaRequisicao.Mensagem);
-                return BadRequest(respostaRequisicao.Mensagem);
+                return StatusCode(StatusCodes.Status500InternalServerError, respostaRequisicao.Mensagem);
             }
 
             _logger.LogInformation("{Mensagem}", respostaRequisicao.Mensagem);
