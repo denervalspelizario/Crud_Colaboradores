@@ -15,7 +15,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "API de Luxor", Version = "v1" });
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Crud Colabradores", Version = "v1" });
     c.EnableAnnotations();
     c.ExampleFilters();
 });
@@ -33,7 +33,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
     app.UseSwagger();
-    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API de Hotel Luxor v1"));
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Crud Colabradores v1"));
 }
 
 app.UseHttpsRedirection();

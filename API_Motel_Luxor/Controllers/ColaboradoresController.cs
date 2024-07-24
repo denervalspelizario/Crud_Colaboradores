@@ -8,7 +8,7 @@ namespace API_Motel_Luxor.Controllers
 {
     
     [ApiController]
-    [Route("ApiLuxor/")]
+    [Route("Colaboradores")]
     public class ColaboradoresController : ControllerBase
     {
         // chamando interface com os metodos de requisicao
