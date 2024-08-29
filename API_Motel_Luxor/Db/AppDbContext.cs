@@ -1,4 +1,5 @@
-﻿using API_Motel_Luxor.Model.Colaboradores;
+﻿using API_Motel_Luxor.Model.Administradores;
+using API_Motel_Luxor.Model.Colaboradores;
 using Microsoft.EntityFrameworkCore;
 
 namespace API_Motel_Luxor.Db
@@ -10,6 +11,7 @@ namespace API_Motel_Luxor.Db
         
         }
         public DbSet<ColaboradoresModel> Colaboradores { get; set; }
+        public DbSet<AdministradoresModel> Administradores { get; set; }
        
     }
 }

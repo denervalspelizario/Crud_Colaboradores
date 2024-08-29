@@ -13,8 +13,6 @@ namespace API_Motel_Luxor.Services.Colaboradores
         private readonly ILogger _logger = logger;
 
         
-        
-
         public async Task<Response<ColaboradorResponseDTO>> AdicaoColaborador(ColaboradoresCreateDTO colaborador)
         {
             // formatação de resposta
