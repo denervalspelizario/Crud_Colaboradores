@@ -6,11 +6,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API_Motel_Luxor.Services.Colaboradores
 {
-    public class ColaboradoresRepository : IColaboradoresRepository
+    public class ColaboradoresRepository(AppDbContext context, ILogger<ColaboradoresRepository> logger) : IColaboradoresRepository
     {
 
-        private readonly AppDbContext _context;
-        private readonly ILogger _logger;
+        private readonly AppDbContext _context = context;
+        private readonly ILogger _logger = logger;
+
+        
+        
 
         public async Task<Response<ColaboradorResponseDTO>> AdicaoColaborador(ColaboradoresCreateDTO colaborador)
         {
