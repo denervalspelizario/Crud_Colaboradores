@@ -1,4 +1,6 @@
+using API_Motel_Luxor.Db;
 using API_Motel_Luxor.Services.Colaboradores;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 
@@ -21,10 +23,14 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 
-// Indicando que ColaboradoresRepository recebe de herança(referenciada) a interface IColaboradoresRepository
 builder.Services.AddScoped<IColaboradoresRepository, ColaboradoresRepository>();
 
 builder.Services.AddSwaggerExamplesFromAssemblyOf<Program>();
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 
 var app = builder.Build();
 

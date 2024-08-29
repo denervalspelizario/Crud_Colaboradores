@@ -8,8 +8,8 @@ namespace API_Motel_Luxor.Services.Colaboradores
 {
     public class ColaboradoresRepository : IColaboradoresRepository
     {
-       
-        private readonly ConnectionContext _context = new ConnectionContext();
+
+        private readonly AppDbContext _context;
         private readonly ILogger _logger;
 
         public async Task<Response<ColaboradorResponseDTO>> AdicaoColaborador(ColaboradoresCreateDTO colaborador)

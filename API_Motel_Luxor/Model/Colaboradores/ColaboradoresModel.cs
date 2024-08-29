@@ -22,6 +22,7 @@ namespace API_Motel_Luxor.Model.Colaboradores
         [Column(TypeName = "date")]
         public DateTime data_admissao { get;  set; }
         public CargoEnum cargo { get;  set; }
+        [Column(TypeName = "decimal(18,2)")]
         public decimal salario { get;  set; }
         public DepartamentoEnum departamento { get;  set; }
         public string status { get;  set; }
