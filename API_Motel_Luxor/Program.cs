@@ -1,5 +1,7 @@
 using API_Motel_Luxor.Db;
+using API_Motel_Luxor.Services.Administadores;
 using API_Motel_Luxor.Services.Colaboradores;
+using API_Motel_Luxor.Services.Senha;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
@@ -24,6 +26,8 @@ builder.Services.AddSwaggerGen(c =>
 
 
 builder.Services.AddScoped<IColaboradoresRepository, ColaboradoresRepository>();
+builder.Services.AddScoped<IAdminstradoresRepository, AdministadoresRepository>();
+builder.Services.AddScoped<ISenhaRepository, SenhaRepository>();
 
 builder.Services.AddSwaggerExamplesFromAssemblyOf<Program>();
 

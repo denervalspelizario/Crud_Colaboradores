@@ -25,5 +25,14 @@ namespace API_Motel_Luxor.Model.Administradores
             SenhaSalt = senhaSalt;
             TokenDataCriacao = tokenDataCriacao;
         }
+
+        public AdministradoresModel( string email, string usuario, CargoEnum cargo, byte[] senhaHash, byte[] senhaSalt)
+        {
+            Email = email;
+            Usuario = usuario;
+            Cargo = cargo;
+            SenhaHash = senhaHash;
+            SenhaSalt = senhaSalt;
+        }
     }
 }
