@@ -6,5 +6,7 @@ namespace API_Motel_Luxor.Services.Administadores
     public interface IAdminstradoresRepository
     {
         Task<Response<AdministradorResponseDTO>> AdicaoAdministador(AdministradoresCreateDTO administrador);
+
+        Task<Response<string>> Login(AdministradorLoginDTO admLogin);
     }
 }

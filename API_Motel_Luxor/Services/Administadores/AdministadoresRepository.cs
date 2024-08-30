@@ -72,8 +72,47 @@ namespace API_Motel_Luxor.Services.Administadores
             return resposta;
         }
 
+        public async Task<Response<string>> Login(AdministradorLoginDTO admLogin)
+        { 
+            Response<string> resposta = new Response<string>();
+
+            try
+            {
+                // validacao email
+                var admEncontrado = await _context.Administradores.FirstOrDefaultAsync(x => x.Email == admLogin.Email);
+                if (admEncontrado == null)
+                {
+                    resposta.Mensagem = "Credenciais inválidas email";
+                    return resposta;
+                }
 
 
+                // validando as senhas passadas
+                // se for false ou seja o metodo VerificaSenhaHash retornou um false(senhas não batem com user do banco)
+                //if (!_senhaRepository.VerificaSenhaHash(admLogin.Senha, admEncontrado.SenhaHash, admEncontrado.SenhaSalt))
+                //{
+                   // resposta.Mensagem = "Credenciais inválidas senhas";
+                   // return resposta;
+                //}
+
+                // deu certo usuario existe e senhas estão batendo com o do banco agora gerar o token baseado
+                // nos dados de usuario
+                var token = _senhaRepository.CriarToken(admEncontrado);
+
+
+                resposta.Dados = token;
+                resposta.Mensagem = "Usuário logado com sucesso";
+
+            }
+            catch (Exception erro)
+            {
+
+                resposta.Dados = null;
+                resposta.Mensagem = erro.Message;
+            }
+
+            return resposta;
+        }
 
         public bool VerificaSeEmailEUsuarioJaExistem(AdministradoresCreateDTO request)
         {

@@ -17,12 +17,21 @@ namespace API_Motel_Luxor.Services.Senha
                 // senha salt(chave para criar e descriptografar a senha hash) e hash(senha criptografada)
                 senhaSalt = hmac.Key;
                 senhaHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(senha));
-
             }
         }
 
         public bool VerificaSenhaHash(string senha, byte[] senhaHash, byte[] senhaSalt)
         {
+            // Converte o array de bytes para uma string hexadecimal
+            string senhaHashHex = ByteArrayToHexString(senhaHash);
+            string senhaSaltHex = ByteArrayToHexString(senhaSalt);
+
+            // Imprime na tela
+            Console.WriteLine("SenhaHash (Hex): " + senhaHashHex);
+            Console.WriteLine();
+            Console.WriteLine("SenhaSalt (Hex): " + senhaSaltHex);
+
+
             using (var hmac = new HMACSHA256(senhaSalt))
             {
                 // senha hash 
@@ -60,6 +69,14 @@ namespace API_Motel_Luxor.Services.Senha
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
 
             return jwt;
+        }
+
+
+        public static string ByteArrayToHexString(byte[] byteArray)
+        {
+            // Converte o array de bytes para uma string hexadecimal
+            string hex = BitConverter.ToString(byteArray).Replace("-", "");
+            return "0x" + hex; // Adiciona o prefixo "0x"
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using API_Motel_Luxor.Dto.Colaboradores;
 using API_Motel_Luxor.Services.Colaboradores;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Swashbuckle.AspNetCore.Filters;
@@ -23,7 +24,7 @@ namespace API_Motel_Luxor.Controllers
             _logger = logger;
         }
 
-
+        [Authorize]
         [HttpPost]
         [Route("adicionarColaborador/")]
         [SwaggerRequestExample(typeof(ColaboradoresCreateDTO), typeof(ColaboradoresExampleDTO))]

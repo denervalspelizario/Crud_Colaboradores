@@ -33,5 +33,16 @@ namespace API_Motel_Luxor.Controllers
 
             return Ok(respostaRequisicao.Dados);
         }
+
+        [HttpPost("loginAdministrador")]
+        public async Task<ActionResult> Login(AdministradorLoginDTO admLogin)
+        {
+            var resposta = await _repository.Login(admLogin);
+
+            return Ok(resposta);
+        }
+
+
+
     }
 }
